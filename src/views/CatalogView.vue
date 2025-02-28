@@ -3,10 +3,8 @@
 import MainLayout from "@/layouts/MainLayout.vue";
 </script>
 
-
 <template>
   <main-layout>
-    <h1 class="text-white">This is an about page</h1>
+    <h1 class="text-white">Catalog page</h1>
   </main-layout>
 </template>
-
