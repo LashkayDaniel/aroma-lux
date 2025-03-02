@@ -2,10 +2,12 @@ import {createRouter, createWebHistory} from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from "@/views/auth/LoginView.vue";
 import CatalogView from "@/views/CatalogView.vue";
+import NotFound from "@/views/NotFound.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
+        {path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound},
         {
             path: '/',
             name: 'home',
@@ -29,6 +31,11 @@ const router = createRouter({
             name: 'catalog',
             component: CatalogView,
         },
+        {
+            path: '/catalog/:id',
+            name: 'product',
+            component: () => import('../views/ProductView.vue'),
+        }
     ],
 })
 
