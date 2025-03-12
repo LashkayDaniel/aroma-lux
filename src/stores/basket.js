@@ -15,7 +15,6 @@ export const useBasketStore = defineStore('basket', () => {
         return basketList
     })
 
-
     // actions
     const isExists = (id) => {
         return basketList.some(itemId => itemId === id)
@@ -30,6 +29,10 @@ export const useBasketStore = defineStore('basket', () => {
         return true
     }
 
+    const removeProduct = (id) => {
+        basketList.splice(basketList.indexOf(id), 1)
+    }
 
-    return {getItems, isExists, addProduct}
+
+    return {getItems, isExists, addProduct, removeProduct}
 })
