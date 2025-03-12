@@ -1,6 +1,6 @@
 <script setup>
 import MainLayout from "@/layouts/MainLayout.vue";
-import ProductList from "@/components/ProductList.vue";
+import ProductList from "@/components/product/ProductList.vue";
 
 
 </script>

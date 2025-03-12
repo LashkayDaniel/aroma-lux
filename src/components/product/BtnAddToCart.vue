@@ -22,7 +22,7 @@ const btnClassStyle = computed(() => {
 
 function addToCart() {
   const successfully = basketStore.addProduct(props.product)
-  if (successfully) alert('Product added to the basket!')
+  if (!successfully) alert("Item is in the cart")
 }
 </script>
 

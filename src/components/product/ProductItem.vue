@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import BtnAddToCart from "@/components/BtnAddToCart.vue";
+import BtnAddToCart from "@/components/product/BtnAddToCart.vue";
 
 interface Product {
   id: number,

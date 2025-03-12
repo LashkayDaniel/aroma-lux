@@ -4,7 +4,7 @@ import {useRoute, useRouter} from "vue-router";
 import MainLayout from "@/layouts/MainLayout.vue";
 import productList from "@/mocks/index.js";
 import {onBeforeMount, reactive} from "vue";
-import BtnAddToCart from "@/components/BtnAddToCart.vue";
+import BtnAddToCart from "@/components/product/BtnAddToCart.vue";
 
 const route = useRoute()
 const router = useRouter()
@@ -14,7 +14,7 @@ let product = reactive(null)
 
 
 function getProduct() {
-  const foundProduct = productList.find(product => product.id === Number.parseInt(productId))
+  const foundProduct = productList.find(product => product.id === Number.parseInt(productId.toString()))
   if (foundProduct) {
     product = foundProduct
   }

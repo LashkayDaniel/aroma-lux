@@ -1,6 +1,6 @@
 <script setup>
 import productList from "@/mocks/index.js";
-import ProductItem from "@/components/ProductItem.vue";
+import ProductItem from "@/components/product/ProductItem.vue";
 </script>
 
 <template>
