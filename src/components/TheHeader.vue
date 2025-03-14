@@ -2,10 +2,17 @@
 import TheLogo from "@/components/TheLogo.vue";
 import {computed, reactive} from "vue";
 import {useBasketStore} from "@/stores/basket.js";
+import {useFavouriteStore} from "@/stores/favourite.js";
+import DisplayAnimation from "@/components/animations/DisplayAnimation.vue";
 
 const emit = defineEmits(['toggleBasket'])
 
 const basketStore = useBasketStore()
+const favouriteStore = useFavouriteStore()
+
+const favouritesLength = computed(() => {
+  return favouriteStore.getAll.length
+})
 
 const basketLength = computed(() => {
   return basketStore.getItems.length
@@ -30,19 +37,27 @@ const navLinks = reactive([
                      aria-label="Sign In">
           Sign In
         </router-link>
-        <button class="group p-1 rounded-lg hover:bg-gray-400/40" title="Liked">
+        <button class="group p-1 rounded-lg hover:bg-gray-400/40 relative"
+                title="Liked">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                stroke="currentColor"
                class="size-7 group-hover:fill-gray-300/50 group-hover:stroke-gray-100 stroke-gray-400 stroke-2 transition-all duration-300">
             <path stroke-linecap="round" stroke-linejoin="round"
                   d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
           </svg>
+          <display-animation>
+              <span v-if="favouritesLength>0" v-text="favouritesLength"
+                    class="px-1 rounded-full bg-amber-500 text-amber-900 font-semibold text-sm absolute -top-1 right-0"/>
+          </display-animation>
+
         </button>
         <button @click="emit('toggleBasket')"
                 class="group p-1 rounded-lg hover:bg-gray-400/40 relative"
                 title="basket">
-          <span v-text="basketLength"
-                class="px-1 rounded-full bg-amber-500 text-amber-900 font-semibold text-sm absolute -top-1 right-0"/>
+          <display-animation>
+            <span v-text="basketLength"
+                  class="px-1 rounded-full bg-amber-500 text-amber-900 font-semibold text-sm absolute -top-1 right-0"/>
+          </display-animation>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                stroke="currentColor"
                class="size-7 group-hover:fill-gray-300/50 group-hover:stroke-gray-100 stroke-gray-400 stroke-2 transition-all duration-300">

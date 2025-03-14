@@ -3,15 +3,18 @@
 import {useRoute, useRouter} from "vue-router";
 import MainLayout from "@/layouts/MainLayout.vue";
 import productList from "@/mocks/index.js";
-import {onBeforeMount, reactive} from "vue";
+import {computed, onBeforeMount, reactive} from "vue";
 import BtnAddToCart from "@/components/product/BtnAddToCart.vue";
+import {useFavouriteStore} from "../stores/favourite.js";
 
 const route = useRoute()
 const router = useRouter()
 const productId = route.params.id
 
 let product = reactive(null)
+const favouriteStore = useFavouriteStore()
 
+const isFavourite = computed(() => favouriteStore.isFavourite(product.id))
 
 function getProduct() {
   const foundProduct = productList.find(product => product.id === Number.parseInt(productId.toString()))
@@ -40,8 +43,20 @@ onBeforeMount(() => {
 
 
     <h1 v-if="product == null" class="text-white text-2xl text-center">Oops... Can`t find the product</h1>
-
     <section v-else class="bg-gray-300/20 p-8 max-w-[70%] rounded-xl mx-auto relative grid grid-cols-2 gap-2">
+      <button @click="favouriteStore.toggle(product.id)"
+              class="absolute group right-6 top-6"
+              :title="isFavourite ? 'unlike' : 'like'">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+             stroke="currentColor"
+             :class="{'fill-red-400 stroke-red-400/40': isFavourite}"
+             class="size-7 group-hover:fill-red-400 group-hover:stroke-red-400/40 stroke-gray-400 stroke-2 transition-all duration-300">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+        </svg>
+      </button>
+
+
       <ul class="absolute top-6 left-4 flex flex-col gap-1">
         <li v-for="tag in product?.tags"
             class="bg-amber-300/90 w-fit px-2 text-sm rounded-full">
