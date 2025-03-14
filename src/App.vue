@@ -13,7 +13,9 @@ const getAnimationName = computed(() => {
 <template>
   <router-view v-slot="{ Component }">
     <transition :name="getAnimationName" mode="out-in">
-      <component :is="Component"/>
+      <KeepAlive :include="['CatalogView']">
+        <component :is="Component"/>
+      </KeepAlive>
     </transition>
   </router-view>
 </template>
