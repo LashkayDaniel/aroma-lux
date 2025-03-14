@@ -53,11 +53,16 @@ const navLinks = reactive([
       </div>
     </div>
     <nav class="text-gray-200 flex space-x-8 text-xl mt-2 border-t border-gray-500/20 w-full justify-center p-2">
-      <template v-for="(link) in navLinks">
-        <router-link :to="link.route"
-                     class="hover:border-b border-amber-300 transition-all duration-300 hover:text-amber-500"
-                     active-class="border-b border-amber-300/40 text-amber-300 transition-all">
+      <template v-for="(link,idx) in navLinks" :key="idx">
+        <router-link
+            :to="link.route"
+            class="relative group transition-all duration-300 hover:text-amber-500 hover:border-0"
+            active-class="border-b border-amber-300/40 text-amber-300 transition-all"
+        >
           {{ link.label }}
+          <span
+              class="absolute bottom-0 left-0 w-0 h-[1px] bg-amber-300 transition-all duration-300 group-hover:w-full"
+          ></span>
         </router-link>
       </template>
     </nav>

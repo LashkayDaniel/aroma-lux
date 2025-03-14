@@ -12,10 +12,12 @@ function showBasket(state) {
 </script>
 
 <template>
-  <the-header @toggle-basket="showBasket(true)"/>
-  <basket-sidebar v-if="showBasketSidebar" @close="showBasket(false)"/>
+  <section>
+    <the-header @toggle-basket="showBasket(true)"/>
+    <basket-sidebar v-if="showBasketSidebar" @close="showBasket(false)"/>
 
-  <main>
-    <slot/>
-  </main>
+    <main>
+      <slot/>
+    </main>
+  </section>
 </template>

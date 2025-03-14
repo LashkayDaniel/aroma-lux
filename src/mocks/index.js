@@ -72,7 +72,7 @@ const productList = [
         title: "Velvet Rose",
         description: "A luxurious, floral fragrance with black rose, patchouli, and vanilla, designed for timeless elegance.",
         price: 599.99,
-        image: "https://bibliotheque-de-parfum.ua/cdn/shop/files/Ultimatum_Page69_Loveisdrug_new.png",
+        image: "https://bibliotheque-de-parfum.ua/cdn/shop/files/100_Ultimatum.jpg",
         category: "Perfumes",
         volume: 100,
         brand: "Dior",
