@@ -1,15 +1,21 @@
 <script setup>
-import {RouterView} from 'vue-router'
+import {RouterView, useRoute} from 'vue-router'
+import {computed} from "vue";
+
+const route = useRoute()
+
+const getAnimationName = computed(() => {
+  return route.meta.animation ?? 'fade'
+})
+
 </script>
 
 <template>
-  <div class="overflow-hidden relative">
-    <router-view v-slot="{ Component }">
-      <transition name="slide-zoom">
-        <component :is="Component"/>
-      </transition>
-    </router-view>
-  </div>
+  <router-view v-slot="{ Component }">
+    <transition :name="getAnimationName" mode="out-in">
+      <component :is="Component"/>
+    </transition>
+  </router-view>
 </template>
 
 <style scoped>
@@ -40,5 +46,14 @@ import {RouterView} from 'vue-router'
   opacity: 0;
   transform: scale(0.8) rotate(10deg) translateX(30px);
   filter: blur(10px);
+}
+
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
 }
 </style>
