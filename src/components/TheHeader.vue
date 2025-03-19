@@ -37,7 +37,8 @@ const navLinks = reactive([
                      aria-label="Sign In">
           Sign In
         </router-link>
-        <button class="group p-1 rounded-lg hover:bg-gray-400/40 relative"
+        <router-link :to="{name:'favourites'}"
+                class="group p-1 rounded-lg hover:bg-gray-400/40 relative"
                 title="Liked">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                stroke="currentColor"
@@ -50,7 +51,7 @@ const navLinks = reactive([
                     class="px-1 rounded-full bg-amber-500 text-amber-900 font-semibold text-sm absolute -top-1 right-0"/>
           </display-animation>
 
-        </button>
+        </router-link>
         <button @click="emit('toggleBasket')"
                 class="group p-1 rounded-lg hover:bg-gray-400/40 relative"
                 title="basket">

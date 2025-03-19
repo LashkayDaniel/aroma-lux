@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from "@/views/auth/LoginView.vue";
 import CatalogView from "@/views/CatalogView.vue";
 import NotFound from "@/views/NotFound.vue";
+import RegisterView from "@/views/auth/RegisterView.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,6 +31,14 @@ const router = createRouter({
             },
         },
         {
+            path: '/register',
+            name: 'register',
+            component: RegisterView,
+            meta: {
+                animation: 'slide-zoom',
+            },
+        },
+        {
             path: '/catalog',
             name: 'catalog',
             component: CatalogView,
@@ -38,6 +47,11 @@ const router = createRouter({
             path: '/catalog/:id',
             name: 'product',
             component: () => import('../views/ProductView.vue'),
+        },
+        {
+            path: '/favourites',
+            name: 'favourites',
+            component: () => import('../views/FavouriteView.vue'),
         }
     ],
 })
