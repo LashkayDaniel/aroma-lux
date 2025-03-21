@@ -1,5 +1,6 @@
 import {defineStore} from "pinia";
 import {computed, reactive, watch} from "vue";
+import {useAuthStore} from "@/stores/auth.js";
 
 export const useBasketStore = defineStore('basket', () => {
     // state
@@ -21,12 +22,17 @@ export const useBasketStore = defineStore('basket', () => {
     }
 
     const addProduct = (product) => {
+        const {isAuthenticated} = useAuthStore()
+
+        if (!isAuthenticated) {
+            return alert('Sign in to add items to your cart')
+        }
+
         const {id: productId} = product
         if (isExists(productId)) {
-            return false
+            return alert("Item is in the cart")
         }
         basketList.push(productId)
-        return true
     }
 
     const removeProduct = (id) => {
