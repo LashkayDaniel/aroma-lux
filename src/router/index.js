@@ -4,6 +4,7 @@ import LoginView from "@/views/auth/LoginView.vue";
 import CatalogView from "@/views/CatalogView.vue";
 import NotFound from "@/views/NotFound.vue";
 import RegisterView from "@/views/auth/RegisterView.vue";
+import {useAuthStore} from "@/stores/auth.js";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -52,8 +53,32 @@ const router = createRouter({
             path: '/favourites',
             name: 'favourites',
             component: () => import('../views/FavouriteView.vue'),
+        },
+        {
+            path: '/profile',
+            name: 'profile',
+            component: () => import('../views/ProfileView.vue'),
+            meta: {
+                protected: true
+            }
         }
     ],
+})
+
+router.beforeEach(async (to, from, next) => {
+    const authStore = useAuthStore()
+    await authStore.initializeAuth;
+
+    if (!authStore.isAuthenticated && to.meta.protected && to.name !== 'login') {
+        return next('/login');
+    }
+
+    console.log(['login', 'register'].includes(to.name))
+    if (authStore.isAuthenticated && ['login', 'register'].includes(to.name)) {
+        return next('/');
+    }
+
+    next();
 })
 
 export default router

@@ -11,11 +11,13 @@ import {useRouter} from "vue-router";
 
 const {errors, meta, handleSubmit, defineField} = useForm({
   validationSchema: yup.object({
+    name: yup.string().min(3),
     email: yup.string().email().min(4).required(),
     password: yup.string().min(6).required(),
   }),
 });
 
+const [name, nameAttrs] = defineField('name');
 const [email, emailAttrs] = defineField('email');
 const [password, passwordAttrs] = defineField('password');
 
@@ -27,14 +29,13 @@ const {parseError} = useAuthError()
 
 const onFormSubmit = handleSubmit(async (values) => {
   try {
-    await authStore.login(values.email, values.password)
+    await authStore.register(values.name, values.email, values.password)
     await router.push('/profile')
   } catch (err) {
-    console.log(err.code)
+    console.log(err)
     authError.value = parseError(err.code);
   }
 });
-
 
 const vFocus = {
   mounted: (el) => {
@@ -46,10 +47,23 @@ const vFocus = {
 <template>
   <auth-layout>
     <template #title>
-      <h1 class="text-2xl text-zinc-400 mt-2 font-bold">Log In</h1>
+      <h1 class="text-2xl text-zinc-400 mt-2 font-bold">Register</h1>
     </template>
 
-    <form @submit.prevent="onFormSubmit" class="flex flex-col my-5 mx-auto w-1/2">
+    <form @submit.prevent="onFormSubmit" class="flex flex-col my-5 mx-auto w-1/2 relative">
+      <label for="name" class="text-lg font-semibold text-gray-300">Name:</label>
+      <input v-focus
+             v-model="name"
+             v-bind="nameAttrs"
+             id="name"
+             :class="{'border border-red-500/60':errors.name}"
+             class="bg-zinc-500/50 px-2 py-1 rounded text-amber-400 focus:ring-amber-500/50 focus:ring-1 focus:outline-none"
+             type="text"
+             placeholder="Mark">
+      <show-animation>
+        <p class="text-sm text-red-500" v-if="errors.name">{{ errors.name }}</p>
+      </show-animation>
+
       <label for="email" class="text-lg font-semibold text-gray-300">Email:</label>
       <input v-focus
              v-model="email"
@@ -83,12 +97,12 @@ const vFocus = {
         <button type="submit"
                 :disabled="!meta.valid"
                 class="w-fit py-1 px-4 mt-4 rounded-lg border-b-2 border-amber-700 text-black font-semibold bg-amber-500 hover:bg-amber-600/90 transition-colors duration-400 disabled:bg-amber-500/30">
-          Login
+          Register
         </button>
 
-        <router-link to="/register"
+        <router-link to="/login"
                      class="text-amber-500/80 hover:text-amber-500/60 transition-all duration-300">
-          Register
+          Login
         </router-link>
       </div>
     </form>
