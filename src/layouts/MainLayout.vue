@@ -19,5 +19,9 @@ function showBasket(state) {
     <main>
       <slot/>
     </main>
+
+    <footer v-if="$slots.footer" class="bg-zinc-900/50 py-8">
+      <slot name="footer"/>
+    </footer>
   </section>
 </template>
