@@ -36,7 +36,7 @@ const navLinks = reactive([
       <div class="flex justify-end items-center space-x-2 sm:space-x-4">
         <router-link v-if="!authStore.isAuthenticated"
                      to="/login"
-                     class="py-1 px-4 font-semibold text-base sm:text-lg text-amber-300 bg-amber-300/20 rounded-full border border-amber-200/30 hover:bg-amber-300/50"
+                     class="py-1 px-4 font-semibold text-sm text-nowrap sm:text-base md:text-lg text-amber-300 bg-amber-300/20 rounded-full border border-amber-200/30 hover:bg-amber-300/50"
                      aria-label="Sign In">
           Sign In
         </router-link>

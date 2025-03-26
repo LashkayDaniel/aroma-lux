@@ -12,7 +12,7 @@ function showBasket(state) {
 </script>
 
 <template>
-  <section>
+  <section class="max-w-[1500px] mx-auto">
     <the-header @toggle-basket="showBasket(true)"/>
     <basket-sidebar v-if="showBasketSidebar" @close="showBasket(false)"/>
 
