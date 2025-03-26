@@ -31,7 +31,7 @@ function addToCart() {
 <template>
   <button @click="addToCart"
           type="button"
-          class="mt-2 text-black font-bold px-4 py-1 rounded border-b-3"
+          class="mt-2 text-black text-sm sm:text-base sm:w-fit font-bold px-4 py-1 rounded border-b-3"
           :class="btnClassStyle">
     {{ isInBasket ? 'In Basket' : 'Add to Cart' }}
   </button>

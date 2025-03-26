@@ -31,8 +31,8 @@ const filteredList = computed(() => {
   <ul class="flex-1 grid grid-cols-2 md:grid-cols-3 gap-2" aria-label="Catalog of products">
     <li v-for="product in filteredList"
         :key="product.id"
-        class="p-4 bg-gray-300/20 rounded-lg shadow-md hover:bg-gray-300/10 transition-all duration-300">
-      <product-item :product="product"></product-item>
+        class="p-2 md:p-4 bg-gray-300/20 flex flex-col justify-between rounded-lg shadow-md hover:bg-gray-300/10 transition-all duration-300">
+      <product-item :product="product"/>
     </li>
   </ul>
 </template>

@@ -9,8 +9,8 @@ const sortBy = ref('default')
 
 <template>
   <main-layout>
-    <section class="p-10 flex flex-row space-x-6">
-      <div class="sticky top-2 basis-64 text-gray-300">
+    <section class="px-6 pb-6 lg:p-10 flex flex-col lg:flex-row gap-4 lg:space-x-6 container mx-auto">
+      <div class="sticky top-2 lg:basis-64 text-gray-300 w-fit">
         <filter-option v-model:sort-by="sortBy"/>
       </div>
 
